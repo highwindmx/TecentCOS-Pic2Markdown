@@ -5,7 +5,7 @@ import os
 from datetime import date
 import Tkinter as tk # Tkinter is for python2, tkinter is for python3
 import tkFileDialog as tfd
-from qcloud_cos import CosClient  # 需要提前手动pip装一下qcloud库
+from qcloud_cos import CosClient # 记得预装一个下库文件
 from qcloud_cos import UploadFileRequest
 
 class Application(tk.Tk): 
@@ -41,14 +41,15 @@ class Application(tk.Tk):
         self.entryRemoteRename.bind("<Return>", self.on_return_rename) # 回车后才会执行
         self.entryRemoteRename.grid(row=1, column=1, sticky='e')        
         #生成新文件名
-        self.label_remote_rename_var =tk.StringVar()
-        self.labelRemoteRename = tk.Label(self, textvariable=self.label_remote_rename_var)
+        self.Rename2Var =tk.StringVar()
+        self.labelRemoteRenameVar =tk.StringVar()
+        self.labelRemoteRename = tk.Label(self, textvariable=self.labelRemoteRenameVar)
         self.labelRemoteRename.grid(row=1, column=2, sticky='w') 
         
 # 2     #上传前信息
         # 设置用户属性, 包括appid, secret_id和secret_key config bucket
         # 这些属性可以在cos控制台获取(https://console.qcloud.com/cos)  # ？？ 可以做成字典
-        self.appid = u'...'                                        # 把...替换为用户的appid
+        self.appid = 125...                                        # 把125...替换为用户的appid
         self.secret_id = u'...'                                    # 把...替换为用户的secret_id
         self.secret_key = u'...'                                   # 把...替换为用户的secret_key
         self.region = "shanghai"                                   # 把...替换为用户的region，目前可以为 shanghai/guangzhou
@@ -97,17 +98,20 @@ class Application(tk.Tk):
         remote_pic_name_prefix = str(now) + u'_'
         remote_pic_new_name = self.entryRemoteRenameVar.get()
         remote_file_name = remote_pic_name_prefix  + remote_pic_new_name
-        self.label_remote_rename_var.set(u'将命名为：' + remote_file_name)
+        self.Rename2Var.set(remote_file_name)
+        self.labelRemoteRenameVar.set(u'将更名为：' + remote_file_name)
         
     def on_button_rename(self):
         self.remote_rename()
+        # print 'button clicked'        
         
     def on_return_rename(self, event):
         self.remote_rename()
+        # print 'return pressed'
    
     def filePathSelect(self):
         # 定义参数
-        defaultFileOpenPath = u'...'  #默认打开的文件路径
+        defaultFileOpenPath = u'...'  # 设置默认打开的文件路径
         localFilePath = tfd.askopenfilename(initialdir=defaultFileOpenPath)
         localFileName = os.path.basename(localFilePath)
         # 返回显示值
@@ -118,22 +122,24 @@ class Application(tk.Tk):
         # print 'file selected'
         
     def OnButtonCopyMdClick(self):
-        clipboard_clear()
-        clipboard_append(self.entryMdUrlVar.get())
+        self.clipboard_clear()
+        self.clipboard_append(self.entryMdUrlVar.get())
         
     def OnButtonCopyHtmlClick(self): 
-        clipboard_clear()
-        clipboard_append(self.entryHtmlUrlVar.get())
+        self.clipboard_clear()
+        self.clipboard_append(self.entryHtmlUrlVar.get())
            
-    def upload_file_2_COS(self):       
+    def upload_file_2_COS(self):      
         cos_client = CosClient(self.appid, self.secret_id, self.secret_key, self.region)
 
         try:
             local_pic_path = self.entryLocalPathVar.get()
             local_pic_name = os.path.basename(local_pic_path)
-            if local_pic_name != '':  # ？？ 判断本地图片存在，不过应该有其他更好的判断方法吧                           
+            if local_pic_name != '':  # ？？ 判断本地图片是否存在，不过应该有其他更好的判断方法吧                           
                 # 设置远程图片路径
-                remote_pic_path = self.remote_folder + self.label_remote_rename_var.get()               
+                remote_pic_path = self.remote_folder + self.Rename2Var.get()
+                # print remote_pic_path #debug用
+                
                 # 上传文件
                 request = UploadFileRequest(self.bucket, remote_pic_path, local_pic_path)
                 request.set_insert_only(self.replace_flag)
@@ -141,7 +147,15 @@ class Application(tk.Tk):
                 # 得到Url
                 upload_url = upload_file_ret['data']['source_url']
                 md_url = '![...]' + '(' + upload_url + ')'
-                html_url = '<img src="' + upload_url + ' "alt="..." style="width: 85%;"/>'
+                html_url = '<img src="' + upload_url + '" alt="..." style="width: 85%;"/>'
+                # debug用
+                # print u'*****************0**********************'
+                # print upload_file_ret
+                # print upload_file_ret['message']
+                # print upload_url
+                # print md_url
+                # print html_url
+                # print u'*****************1**********************'
                 
                 #窗口返回赋值
                 self.labelUploadStatueVar.set(upload_file_ret['message']) #返回是否上传成功的提示
