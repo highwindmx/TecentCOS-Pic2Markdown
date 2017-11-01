@@ -107,7 +107,7 @@ class Application(tk.Tk):
    
     def filePathSelect(self):
         # 定义参数
-        defaultFileOpenPath = u'E://Share//blog//blog-hexo//source//_img//'  #默认打开的文件路径
+        defaultFileOpenPath = u'...'  #默认打开的文件路径
         localFilePath = tfd.askopenfilename(initialdir=defaultFileOpenPath)
         localFileName = os.path.basename(localFilePath)
         # 返回显示值
