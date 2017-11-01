@@ -10,8 +10,8 @@
 3. 下载主程序`COS2Markdown.py`
 4. 文本打开主程序，配置一下：
    - 4.1. COS信息配置
-![COS-bucket查找](http://picpool-1255373220.cossh.myqcloud.com/Blog_Hexo_CodingNet/COS-bucket.png)
-![COS-API查找](http://picpool-1255373220.cossh.myqcloud.com/Blog_Hexo_CodingNet/COS-API.png)
+![COS-bucket查找](http://picpool-1255373220.cossh.myqcloud.com/Blog_Hexo_CodingNet/2017-11-01_COS-bucket.png)
+![COS-API查找](http://picpool-1255373220.cossh.myqcloud.com/Blog_Hexo_CodingNet/2017-11-01_COS-API.png)
    ~~~ python
         #上传前信息
         # 设置用户属性, 包括appid, secret_id和secret_key config bucket
@@ -32,7 +32,6 @@
         # 因为没法拖放所以用一下打开起始位置的功能：一来方便，二来可以养成本地图片保存的习惯
    ~~~
 5. 保存好，用`python 路径 + COS2Markdown.py`运行即可
-![Demo演示效果](http://picpool-1255373220.cossh.myqcloud.com/Blog_Hexo_CodingNet/cos2md-tool.png)
-
+![Demo演示效果](http://picpool-1255373220.cossh.myqcloud.com/Blog_Hexo_CodingNet/2017-11-01_cos2md-tool.png)
 # 更多
 因为暂时够用（虽然是一个一个图片上传），我可能不会再继续折腾这东西，不过如果有兴趣的各位可以帮忙再贡献贡献咯。
