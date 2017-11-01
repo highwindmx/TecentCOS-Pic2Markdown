@@ -31,7 +31,7 @@
         defaultFileOpenPath = u'...'  #默认打开的文件路径            #注意win下的路径格式，eg:‘d://Share//blog//hexo//source//_img//’
         # 因为没法拖放所以用一下打开起始位置的功能：一来方便，二来可以养成本地图片保存的习惯
    ~~~
-5. 保存好，用`python 路径 + COS2Markdown.py`运行即可
+5. 保存好，用`python 路径 + COS2Markdown.py`运行即可（或者用`pyinstaller`转成exe文件运行也行）
 ![Demo演示效果](http://picpool-1255373220.cossh.myqcloud.com/Blog_Hexo_CodingNet/2017-11-01_cos2md-tool.png)
 # 更多
 因为暂时够用（虽然是一个一个图片上传），我可能不会再继续折腾这东西，不过如果有兴趣的各位可以帮忙再贡献贡献咯。
