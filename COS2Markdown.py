@@ -162,7 +162,8 @@ class Application(tk.Tk):
                 self.entryMdUrlVar.set(md_url)
                 self.entryHtmlUrlVar.set(html_url)
             else:
-                print 'local Picture Name Incorrect!'
+                #print 'local Picture Name Incorrect!'
+                pass
         except:
             pass
             
